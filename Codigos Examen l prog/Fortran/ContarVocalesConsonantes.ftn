@@ -1,0 +1,34 @@
+program ContarVocalesConsonantes
+  implicit none
+  character(len=100) :: cadena
+  integer :: i, longitud, vocalCount, consonantCount
+  character :: caracter
+
+  write(*,*) 'Introduce una cadena:'
+  read(*,*) cadena
+
+  longitud = len_trim(cadena)
+  vocalCount = 0
+  consonantCount = 0
+
+  do i = 1, longitud
+    caracter = cadena(i:i)
+    ! Convertir a mayúsculas para simplificar la comparación
+    if (ichar(caracter) >= ichar('a') .and. ichar(caracter) <= ichar('z')) then
+      caracter = char(ichar(caracter) - ichar('a') + ichar('A'))
+    end if
+
+    if (ichar(caracter) >= ichar('A') .and. ichar(caracter) <= ichar('Z')) then
+      select case (caracter)
+        case ('A', 'E', 'I', 'O', 'U')
+          vocalCount = vocalCount + 1
+        case default
+          consonantCount = consonantCount + 1
+      end select
+    end if
+  end do
+
+  write(*,*) 'Número de vocales:', vocalCount
+  write(*,*) 'Número de consonantes:', consonantCount
+
+end program ContarVocalesConsonantes

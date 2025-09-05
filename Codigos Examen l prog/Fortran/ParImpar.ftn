@@ -1,0 +1,15 @@
+program ParImpar
+! Caleb pitalua
+  implicit none
+  integer :: numero
+
+  write(*,*) 'Ingrese un número:'
+  read(*,*) numero
+
+  if (mod(numero, 2) == 0) then
+    write(*,*) numero, ' es un número par.'
+  else
+    write(*,*) numero, ' es un número impar.'
+  end if
+
+end program ParImpar

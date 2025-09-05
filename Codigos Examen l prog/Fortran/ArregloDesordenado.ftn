@@ -1,0 +1,121 @@
+program ArregloDesordenado
+  implicit none
+
+  integer, parameter :: MAX_SIZE = 10
+  integer, dimension(MAX_SIZE) :: arreglo
+  integer :: tamActual
+  integer :: opcion, valor, posicion, i
+
+  ! --- Subrutinas y Funciones ---
+
+  ! Inicializa el arreglo
+  call InicializarArreglo(arreglo, tamActual)
+
+  ! Bucle principal del menú
+  do while (opcion /= 0)
+    print *, ''
+    print *, '--- MENU ARREGLO DESORDENADO ---'
+    print *, '1. Crear/Reinicializar Arreglo'
+    print *, '2. Insertar Elemento'
+    print *, '3. Buscar Elemento'
+    print *, '4. Eliminar Elemento'
+    print *, '5. Mostrar Arreglo'
+    print *, '0. Salir'
+    print *, 'Ingrese su opcion: '
+    read (*,*) opcion
+
+    select case (opcion)
+      case (1)
+        call InicializarArreglo(arreglo, tamActual)
+      case (2)
+        print *, 'Ingrese el valor a insertar: '
+        read (*,*) valor
+        call InsertarElemento(arreglo, tamActual, valor)
+      case (3)
+        print *, 'Ingrese el valor a buscar: '
+        read (*,*) valor
+        posicion = BuscarElemento(arreglo, tamActual, valor)
+        if (posicion /= -1) then
+          print *, 'Elemento ', valor, ' encontrado en la posicion ', posicion, '.'
+        else
+          print *, 'Elemento ', valor, ' no encontrado.'
+        end if
+      case (4)
+        print *, 'Ingrese el valor a eliminar: '
+        read (*,*) valor
+        call EliminarElemento(arreglo, tamActual, valor)
+      case (5)
+        call MostrarArreglo(arreglo, tamActual)
+      case (0)
+        print *, 'Saliendo del programa.'
+      case default
+        print *, 'Opcion invalida. Intente de nuevo.'
+    end select
+  end do
+
+contains
+
+  subroutine InicializarArreglo(arr, tam)
+    integer, dimension(*) :: arr
+    integer, intent(out) :: tam
+    tam = 0
+    print *, 'Arreglo inicializado.'
+  end subroutine InicializarArreglo
+
+  subroutine MostrarArreglo(arr, tam)
+    integer, dimension(*) :: arr
+    integer, intent(in) :: tam
+    integer :: k
+    if (tam == 0) then
+      print *, 'El arreglo esta vacio.'
+      return
+    end if
+    write (*, '(A, *(I0, A))') 'Arreglo: [', (arr(k), ', ', k=1, tam-1), arr(tam), ']'
+  end subroutine MostrarArreglo
+
+  subroutine InsertarElemento(arr, tam, elemento)
+    integer, dimension(*) :: arr
+    integer, intent(inout) :: tam
+    integer, intent(in) :: elemento
+    if (tam < MAX_SIZE) then
+      tam = tam + 1
+      arr(tam) = elemento
+      print *, 'Elemento ', elemento, ' insertado.'
+    else
+      print *, 'El arreglo esta lleno, no se puede insertar.'
+    end if
+  end subroutine InsertarElemento
+
+  function BuscarElemento(arr, tam, elemento) result(pos)
+    integer, dimension(*) :: arr
+    integer, intent(in) :: tam
+    integer, intent(in) :: elemento
+    integer :: pos, k
+    pos = -1 ! No encontrado
+    do k = 1, tam
+      if (arr(k) == elemento) then
+        pos = k
+        return
+      end if
+    end do
+  end function BuscarElemento
+
+  subroutine EliminarElemento(arr, tam, elemento)
+    integer, dimension(*) :: arr
+    integer, intent(inout) :: tam
+    integer, intent(in) :: elemento
+    integer :: pos, k
+    pos = BuscarElemento(arr, tam, elemento)
+    if (pos /= -1) then
+      ! Mover elementos hacia adelante para cubrir el espacio
+      do k = pos, tam - 1
+        arr(k) = arr(k+1)
+      end do
+      tam = tam - 1
+      print *, 'Elemento ', elemento, ' eliminado.'
+    else
+      print *, 'Elemento ', elemento, ' no encontrado para eliminar.'
+    end if
+  end subroutine EliminarElemento
+
+end program ArregloDesordenado

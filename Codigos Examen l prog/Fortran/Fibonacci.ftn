@@ -1,0 +1,25 @@
+program FibonacciSerie
+  implicit none
+  integer :: n, i, a, b, temp
+
+  write(*,*) 'Ingrese el número de términos (n): '
+  read(*,*) n
+
+  a = 0
+  b = 1
+
+  if (n >= 1) then
+    write(*,*) a
+  end if
+  if (n >= 2) then
+    write(*,*) b
+  end if
+
+  do i = 3, n
+    temp = a + b
+    write(*,*) temp
+    a = b
+    b = temp
+  end do
+
+end program FibonacciSerie

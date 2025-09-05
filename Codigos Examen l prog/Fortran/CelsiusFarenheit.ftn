@@ -1,0 +1,15 @@
+PROGRAM CELSIUS_A_FAHRENHEIT
+  !Caleb Leonardo Pitalúa Salazar
+  IMPLICIT NONE
+  REAL :: celsius, fahrenheit
+
+  ! Solicitar al usuario que ingrese la temperatura en Celsius
+  WRITE(*,*) 'Ingrese la temperatura en grados Celsius:'
+  READ(*,*) celsius
+
+  ! Calcular la temperatura en Fahrenheit
+  fahrenheit = (celsius * 9.0 / 5.0) + 32.0
+
+  ! Mostrar el resultado
+  WRITE(*,*) 'La temperatura en Fahrenheit es:', fahrenheit
+END PROGRAM CELSIUS_A_FAHRENHEIT
