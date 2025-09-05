@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector> 
 
-// Para un arreglo C-style de tamaño fijo:
-// const int MAX_SIZE = 10;
-// int arreglo[MAX_SIZE];
-// int tamActual = 0;
 
 void inicializarArreglo(std::vector<int>& arr) {
     arr.clear(); // Vacía el vector
@@ -27,13 +23,7 @@ void mostrarArreglo(const std::vector<int>& arr) {
 }
 
 void insertarElemento(std::vector<int>& arr, int elemento) {
-    // Si usaras un arreglo C-style con MAX_SIZE:
-    // if (tamActual < MAX_SIZE) {
-    //     arreglo[tamActual++] = elemento;
-    //     std::cout << "Elemento " << elemento << " insertado." << std::endl;
-    // } else {
-    //     std::cout << "El arreglo esta lleno, no se puede insertar." << std::endl;
-    // }
+   
 
     arr.push_back(elemento); // std::vector maneja el tamaño dinámicamente
     std::cout << "Elemento " << elemento << " insertado." << std::endl;
