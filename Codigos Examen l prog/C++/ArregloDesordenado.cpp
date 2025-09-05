@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector> // Usaremos std::vector para un manejo más flexible del tamaño,
-                  // pero puedes usar un arreglo C-style si lo prefieres para la limitación.
+#include <vector> 
 
 // Para un arreglo C-style de tamaño fijo:
 // const int MAX_SIZE = 10;
